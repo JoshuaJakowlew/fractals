@@ -3,15 +3,15 @@ import turtle
 # Длина шага
 step = 50
 # Стартовая точка
-posx, posy = -300, -300
+posx, posy = 0, 0
 # Начальный угол поворота
-alpha = 90
+alpha = 0
 # Угол поворота
-theta = 180/8
+theta = 180/3
 # Аксиома
-axiom = 'F'
+axiom = '[F]+[F]+[F]+[F]+[F]+[F]'
 # Порождающее правило
-newrule = {'F': '-F+F+[+F-F-]-[-F+F+F]', 'X': '--FXF++FXF++FXF--'}
+newrule = {'F': 'F[++F][-FF]FF[+F][-F]FF'}
 
 # Инициализация черепашки
 pen = turtle.Turtle()
@@ -26,7 +26,7 @@ pen.down()
 def draw(rule, iters):
     # Изменяем размер шага, чтобы черепашка не вылезала за экран
     global step
-    step /= (iters + 1)
+    step /= (iters + 1) * 6
 
     # Применяем порождающее правило ровно iters раз  
     for i in range(iters):
@@ -38,7 +38,7 @@ def draw(rule, iters):
     for word in rule:
         if word == 'F': # На F просто двигаемся вперед
             pen.forward(step)
-        elif word == 'g': # На g отрываем от холста перо, шагаем вперед и опускаем перо
+        elif word == 'b': # На g отрываем от холста перо, шагаем вперед и опускаем перо
             pen.up()
             pen.forward(step)
             pen.down()
@@ -57,6 +57,6 @@ def draw(rule, iters):
 
 # Отрисовка
 turtle.tracer(0, 0)
-draw(axiom, 5)
+draw(axiom, 3)
 turtle.update()
 turtle.done()
